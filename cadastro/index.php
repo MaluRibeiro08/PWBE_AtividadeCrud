@@ -17,13 +17,13 @@
                 <form method="post" action="../acoes.php">
 
                     <input class="form-control" type="hidden" name="acao" value="cadastrar">
-                    <input class="form-control" type="text" placeholder="Digite o nome" name="nome" id="nome">
+                    <input class="form-control" type="text" placeholder="Digite o nome" name="nome" id="nome" required>
                     <br />
-                    <input class="form-control" type="text" placeholder="Digite o sobrenome" name="sobrenome" id="sobrenome">
+                    <input class="form-control" type="text" placeholder="Digite o sobrenome" name="sobrenome" id="sobrenome" required>
                     <br />
-                    <input class="form-control" type="text" placeholder="Digite o email" name="email" id="email">
+                    <input class="form-control" type="text" placeholder="Digite o email" name="email" id="email" required>
                     <br />
-                    <input class="form-control" type="text" placeholder="Digite celular" name="celular" id="celular">
+                    <input class="form-control" type="text" placeholder="Digite celular" name="celular" id="celular" required>
                     <br />
                     <button class="btn btn-success">CADASTRAR</button>
                 </form>
