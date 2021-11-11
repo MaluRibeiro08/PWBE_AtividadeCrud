@@ -1,8 +1,8 @@
 #CRIAR O BANCO DE DADOS:
-create database cadastro;
+create database cadastroAtividadeCrud;
 
 #HABILITAR O BANCO DE DADOS:
-use cadastro;
+use cadastroAtividadeCrud;
 
 #CRIAR A TABELA DE PESSOAS NO BANCO DE DADOS:
 create table tbl_pessoa(

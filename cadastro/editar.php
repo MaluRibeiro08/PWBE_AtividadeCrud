@@ -1,5 +1,18 @@
 <?php
     include('../componentes/header.php');
+    require("../acoes.php");
+
+    if (!isset($_SESSION["usuarioId"])) 
+    {
+        header("location: ../login/index.php");
+    }
+
+    //RECUPERANDO DADOS DA PESSOA
+        # Pegando ID vindo na url
+        $idPessoaBuscar = $_GET['id'];
+        # chamando a função de busca a pessoa pelo id
+        $resultadoBusca = listarPessoaPeloId($conexao, $idPessoaBuscar);
+        $pessoaEditar = mysqli_fetch_array($resultadoBusca);
 ?>
 
 
@@ -10,16 +23,19 @@
                 <h2>Edição</h2>
             </div>
             <div class="card-body">
-                <form method="post" action="">
-                    <input class="form-control" type="text" placeholder="Digite o nome" name="nome" id="nome">
+                <form method="POST" action="../acoes.php">
+                    <input class="form-control" type="hidden" name="acao" value="editar">
+                    <input class="form-control" type="hidden" name="id" value='<?= $pessoaEditar["cod_pessoa"]?>'>
+
+                    <input class="form-control" type="text" name="nome" id="nome" value='<?= $pessoaEditar["nome"]?>'>
                     <br />
-                    <input class="form-control" type="text" placeholder="Digite o sobrenome" name="sobrenome" id="sobrenome">
+                    <input class="form-control" type="text" name="sobrenome" id="sobrenome" value='<?= $pessoaEditar["sobrenome"]?>'>
                     <br />
-                    <input class="form-control" type="text" placeholder="Digite o email" name="email" id="email">
+                    <input class="form-control" type="text" name="email" id="email" value='<?= $pessoaEditar["email"]?>'>
                     <br />
-                    <input class="form-control" type="text" placeholder="Digite celular" name="celular" id="celular">
+                    <input class="form-control" type="text"name="celular" id="celular" value='<?= $pessoaEditar["celular"]?>'>
                     <br />
-                    <button class="btn btn-success">EDITAR</button>
+                    <button class="btn btn-success">Salvar Edição</button>
                 </form>
             </div>
         </div>

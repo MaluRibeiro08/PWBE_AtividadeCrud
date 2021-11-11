@@ -1,5 +1,13 @@
 <?php
     include('../componentes/header.php');
+    require("../acoes.php");
+
+    if (!isset($_SESSION["usuarioId"])) 
+    {
+        header("location: ../login/index.php");
+    }
+
+    $resultado = listarPessoas($conexao);
 ?>
 
 <div class="container">
@@ -20,22 +28,29 @@
     </thead>
 
     <tbody>
-            <tr>
-                <th>1</th>
-                <th>TESTE DE NOME</th>
-                <th>TESTE DE SOBRENOME</th>
-                <th>TESTE DE EMAIL</th>
-                <th>TESTE DE CELULAR</th>
-                <th>
-                    <button class="btn btn-warning">Editar</button>
+            <?php 
+                while ($pessoa = mysqli_fetch_array($resultado)) 
+                {
+                    ?>
+                    <tr>
+                        <th><?= $pessoa["cod_pessoa"]?></th>
+                        <th><?= $pessoa["nome"]?></th>
+                        <th><?= $pessoa["sobrenome"]?></th>
+                        <th><?= $pessoa["email"]?></th>
+                        <th><?= $pessoa["celular"]?></th>
 
-                    <form action="" method="post" style="display: inline;">
-                        <input type="hidden" name="id" value="">
-                        <button class="btn btn-danger">Excluir</button>
-                    </form>
-                    
-                </th>
-            </tr>
+                        <th>
+                            <a class="btn btn-warning" href="../cadastro/editar.php?id=<?= $pessoa['cod_pessoa']?>">Editar</a>
+
+                            <form action="../acoes.php" method="post" style="display: inline;">
+                                <input type="hidden" name="acao" value="excluir">
+                                <input type="hidden" name="id" value="<?= $pessoa["cod_pessoa"]?>">
+                                <button class="btn btn-danger">Excluir</button>
+                            </form>
+                            
+                        </th>
+                    </tr>
+            <?php }?>
     </tbody>
 
     </table>

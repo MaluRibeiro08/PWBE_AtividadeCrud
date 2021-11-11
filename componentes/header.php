@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,26 +23,41 @@
         Cadastro
     </a>
 
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="../cadastro">Cadastrar</a>
-        </li>
+    <?php if (isset($_SESSION["usuarioId"])) 
+        {?>
 
-    </ul>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../cadastro">Cadastrar</a>
+                </li>
 
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="../listagem">Listar</a>
-        </li>
+            </ul>
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../listagem">Listar</a>
+                </li>
+                
+            </ul>
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" onclick="sair()">Sair</a>
+                </li>
+            </ul>
         
-    </ul>
 
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="../login/">Sair</a>
-        </li>
-        
-    </ul>
+    <form id="form-logout" style="display:none" method="POST" action="../login/processa_login.php">
+            <input type="hidden" name="acao" value="sair" />
+    </form>
+
+    <script lang="javascript">
+        function sair() 
+        {
+            document.querySelector("#form-logout").submit();
+        }
+    </script>
+    <?php }?>
     
 
 </nav>
